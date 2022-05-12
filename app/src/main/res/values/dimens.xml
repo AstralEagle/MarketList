@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Size de nom de l'applie sur l'ecrand de chargement -->
     <dimen name="size_name_app" >80sp</dimen>
+    <!-- Size de la barre pour l'ajout d'un item -->
+    <dimen name="size_barre_add_item">80dp</dimen>
+
 </resources>

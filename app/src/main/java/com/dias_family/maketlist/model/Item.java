@@ -8,13 +8,13 @@ import java.util.List;
 
 public class Item {
 
-    public static List<Item> listCourse = new ArrayList<>();
 
     public static HashMap<String, Item> listItem = new HashMap<>();
 
     private String itemName;
     private int utilisation;
 
+    //Constructor
     private Item(String itemname) {
         this.itemName = itemname;
         this.utilisation = 0;
@@ -23,16 +23,30 @@ public class Item {
     }
 
     // Fonction qui ajoute l'item a la liste de course, si il n'existe pas encore il le créer.
-    public void putItemOnCourse(String itemName) {
+    public Item putItemOnCourse(String itemName) {
 
         if (!listItem.containsKey(itemName)) {
-
-            listCourse.add(new Item(itemName));
-
+            return (new Item(itemName));
         } else {
-            listCourse.add(listItem.get(itemName));
-            System.out.println(R.string.item_existant);
+            return (listItem.get(itemName));
         }
     }
 
+
+    //Getter et setteur
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public int getUtilisation() {
+        return utilisation;
+    }
+
+    public void addUsation() {
+        this.utilisation++;
+    }
 }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MaketList</string>
-    <string name="item_existant">L\'objet est deja créer</string>
+    <string name="for_buy_product">Nom du produit à acheter</string>
+    <string name="add_item">Ajouter</string>
 </resources>
