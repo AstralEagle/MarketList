@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MaketList</string>
+    <string name="item_existant">L\'objet est deja créer</string>
 </resources>
