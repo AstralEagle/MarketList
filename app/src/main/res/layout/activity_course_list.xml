@@ -8,15 +8,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         >
 
         <ListView
             android:id="@+id/list_course_list_item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
+            android:layout_height="match_parent"
+            android:layout_above="@+id/div_parent_add_item"
+            android:background="@drawable/corner" />
         <LinearLayout
+            android:id="@+id/div_parent_add_item"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_barre_add_item"
             android:layout_alignParentBottom="true"

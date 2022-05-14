@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class ListCourse {
 
-    private static ArrayList<String> listCourse = new ArrayList<>();
+    private static ArrayList<Item> listCourse = new ArrayList<>();
 
     public static void setList(ArrayList list){
         listCourse = list;
     }
 
-    public static ArrayList<String> getList(){
+    public static ArrayList<Item> getList(){
         return listCourse;
     }
 
@@ -21,7 +21,7 @@ public class ListCourse {
     public static boolean addItem(String nameItem){
         Item item = Item.getItem(nameItem);
         if(!listCourse.contains(item)) {
-            listCourse.add(nameItem);
+            listCourse.add(item);
             return true;
         }else {
             return false;

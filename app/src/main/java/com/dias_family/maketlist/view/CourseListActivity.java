@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,12 +15,13 @@ import android.widget.Toast;
 
 import com.dias_family.maketlist.R;
 import com.dias_family.maketlist.controle.ListCourse;
+import com.dias_family.maketlist.controle.adapter.CourseAdapter;
 import com.dias_family.maketlist.model.Item;
 
 public class CourseListActivity extends AppCompatActivity {
 
     private ListView listViewItem;
-    private ArrayAdapter listAdapter;
+    private CourseAdapter listAdapter;
 
     private EditText editTextProduct;
     private Button buttonAddproduct;
@@ -64,9 +66,20 @@ public class CourseListActivity extends AppCompatActivity {
         });
 
         //Onatribue l'adpter  à la ListView
-        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,ListCourse.getList());
+        listAdapter = new CourseAdapter(this, ListCourse.getList());
         listViewItem.setAdapter(listAdapter);
 
+        listViewItem.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ListCourse.removeItem(ListCourse.getList().get(position));
+                toastMsg(R.string.remove_item);
+                listAdapter.notifyDataSetChanged();
+
+                return false;
+            }
+        });
     }
 
     //Function pour afficher un Toast

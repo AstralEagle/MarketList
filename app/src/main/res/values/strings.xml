@@ -4,4 +4,5 @@
     <string name="add_item">Ajouter</string>
     <string name="adding_item">L\'article a été ajouté a votre liste</string>
     <string name="adding_error">L\article est déjà dans votre liste</string>
+    <string name="remove_item">L\'atricle a été suprimé de votre liste</string>
 </resources>
