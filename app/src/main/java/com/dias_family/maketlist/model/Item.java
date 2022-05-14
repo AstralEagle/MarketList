@@ -23,7 +23,7 @@ public class Item {
     }
 
     // Fonction qui ajoute l'item a la liste de course, si il n'existe pas encore il le créer.
-    public Item putItemOnCourse(String itemName) {
+    public static Item getItem(String itemName) {
 
         if (!listItem.containsKey(itemName)) {
             return (new Item(itemName));

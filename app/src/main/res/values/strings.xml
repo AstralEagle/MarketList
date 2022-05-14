@@ -2,4 +2,6 @@
     <string name="app_name">MaketList</string>
     <string name="for_buy_product">Nom du produit à acheter</string>
     <string name="add_item">Ajouter</string>
+    <string name="adding_item">L\'article a été ajouté a votre liste</string>
+    <string name="adding_error">L\article est déjà dans votre liste</string>
 </resources>

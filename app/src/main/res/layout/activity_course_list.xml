@@ -11,6 +11,7 @@
         >
 
         <ListView
+            android:id="@+id/list_course_list_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -24,11 +25,14 @@
             android:gravity="center">
 
             <EditText
+                android:id="@+id/list_course_name_product"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:hint="@string/for_buy_product"
+                android:textColorHint="@color/black"
                 />
             <Button
+                android:id="@+id/list_couse_button_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_item"
