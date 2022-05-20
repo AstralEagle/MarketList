@@ -14,7 +14,10 @@
         android:theme="@style/AppBaseTheme"
         tools:targetApi="31">
         <activity
-            android:name=".OnMaketActivity"
+            android:name=".WriteListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.OnMaketActivity"
             android:exported="false" />
         <activity
             android:name=".view.CourseListActivity"

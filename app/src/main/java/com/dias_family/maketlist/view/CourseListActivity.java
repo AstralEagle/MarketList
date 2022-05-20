@@ -36,7 +36,6 @@ public class CourseListActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-                System.out.println(actionId);
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
                     if (editTextProduct.getText().toString().length() > 0) {
                         if (ListCourse.addItem(editTextProduct.getText().toString())) {

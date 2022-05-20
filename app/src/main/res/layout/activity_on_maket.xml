@@ -25,6 +25,11 @@
                 android:inputType="text"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"/>
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                />
 
         </RelativeLayout>
 

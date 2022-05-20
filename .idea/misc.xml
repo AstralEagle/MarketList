@@ -6,9 +6,11 @@
         <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/corner.xml" value="0.2365" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2385" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/item_course_list.xml" value="0.2365" />
+        <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/item_on_panner.xml" value="0.305" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_course_list.xml" value="0.1" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_main.xml" value="0.14" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_on_maket.xml" value="0.2703125" />
+        <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_write_list.xml" value="0.36666666666666664" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/item_list_course.xml" value="0.25" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/item_list_market.xml" value="0.26927083333333335" />
       </map>

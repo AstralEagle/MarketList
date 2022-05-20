@@ -1,6 +1,7 @@
 package com.dias_family.maketlist.controle.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,6 @@ import android.widget.TextView;
 
 
 import com.dias_family.maketlist.R;
-import com.dias_family.maketlist.controle.OnMarket;
-import com.dias_family.maketlist.model.Item;
 import com.dias_family.maketlist.model.OnMarketItem;
 
 import java.util.ArrayList;
@@ -62,16 +61,9 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
 
         OnMarketItem item = this.itemList.get(position);
         holder.itemNameView.setText(item.getItem().getItemName());
-        convertView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-
-                staticList.remove(itemList.get(position));
-                itemList.remove(itemList.get(position));
-                notifyDataSetChanged();
-                return false;
-            }
-        });
+        if(item.isOnPanner()){
+            holder.itemNameView.setBackground(mContext.getResources().getDrawable(R.drawable.item_on_panner));
+        }
 
         return convertView;
 

@@ -4,7 +4,6 @@ import com.dias_family.maketlist.model.Item;
 import com.dias_family.maketlist.model.OnMarketItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class OnMarket {
 
