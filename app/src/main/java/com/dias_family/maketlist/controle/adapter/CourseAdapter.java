@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 
@@ -17,7 +19,7 @@ public class CourseAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater layoutInflater;
-    private ArrayList<Item> itemList = new ArrayList<Item>();
+    private ArrayList<Item> itemList;
 
     public CourseAdapter(Context mContext, ArrayList<Item> itemList) {
         this.mContext = mContext;
@@ -31,7 +33,7 @@ public class CourseAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Item getItem(int position) {
         return itemList.get(position);
     }
 
@@ -61,7 +63,7 @@ public class CourseAdapter extends BaseAdapter {
 
     }
 
-    static class ViewHolder{
+    private static class ViewHolder{
         TextView itemNameView;
     }
 }

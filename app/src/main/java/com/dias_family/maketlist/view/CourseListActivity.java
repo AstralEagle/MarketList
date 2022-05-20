@@ -3,20 +3,18 @@ package com.dias_family.maketlist.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dias_family.maketlist.R;
 import com.dias_family.maketlist.controle.ListCourse;
 import com.dias_family.maketlist.controle.adapter.CourseAdapter;
-import com.dias_family.maketlist.model.Item;
 
 public class CourseListActivity extends AppCompatActivity {
 
@@ -24,7 +22,7 @@ public class CourseListActivity extends AppCompatActivity {
     private CourseAdapter listAdapter;
 
     private EditText editTextProduct;
-    private Button buttonAddproduct;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,35 +31,31 @@ public class CourseListActivity extends AppCompatActivity {
 
         listViewItem = (ListView) findViewById(R.id.list_course_list_item);
         editTextProduct = (EditText) findViewById(R.id.list_course_name_product);
-        buttonAddproduct = (Button) findViewById(R.id.list_couse_button_product);
 
-        buttonAddproduct.setEnabled(false);
-        editTextProduct.addTextChangedListener(new TextWatcher() {
+        editTextProduct.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-            }
+                System.out.println(actionId);
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    if (editTextProduct.getText().toString().length() > 0) {
+                        if (ListCourse.addItem(editTextProduct.getText().toString())) {
+                            listAdapter.notifyDataSetChanged();
+                            toastMsg(R.string.adding_item);
+                            editTextProduct.setText(null);
+                            //affichage list
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                buttonAddproduct.setEnabled(!editable.toString().isEmpty());
-            }
-        });
-        buttonAddproduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(ListCourse.addItem(editTextProduct.getText().toString())){
-                    listAdapter.notifyDataSetChanged();
-                    toastMsg(R.string.adding_item);
-                    //affichage list
-                }else{
-                    toastMsg(R.string.adding_error);
+                        } else {
+                            toastMsg(R.string.adding_error);
+                            return true;
+                        }
+                    }else{
+                        toastMsg(R.string.error_item_name);
+                        return true;
+                    }
                 }
+                return false;
+
             }
         });
 
@@ -83,8 +77,8 @@ public class CourseListActivity extends AppCompatActivity {
     }
 
     //Function pour afficher un Toast
-    private void toastMsg(int msg){
-        Toast toast = Toast.makeText(this,msg,Toast.LENGTH_SHORT);
+    private void toastMsg(int msg) {
+        Toast toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
         toast.show();
     }
 }

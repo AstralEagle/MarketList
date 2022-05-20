@@ -2,11 +2,12 @@ package com.dias_family.maketlist.model;
 
 import com.dias_family.maketlist.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Item {
+public class Item implements Serializable {
 
 
     public static HashMap<String, Item> listItem = new HashMap<>();
