@@ -17,7 +17,11 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("MarketList");
 
-        Intent mainIntent = new Intent(MainActivity.this, CourseListActivity.class);
+        //Intent mainIntent = new Intent(MainActivity.this, CourseListActivity.class);
+        System.out.println("Befor Intent");
+        Intent mainIntent = new Intent(MainActivity.this, WriteListActivity.class);
+        System.out.println("After Adapter");
         startActivity(mainIntent);
+        finish();
     }
 }

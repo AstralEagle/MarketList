@@ -6,6 +6,10 @@
     <string name="adding_error">L\article est déjà dans votre liste</string>
     <string name="remove_item">L\'atricle a été suprimé de votre liste</string>
     <string name="error_item_name">Le nom de l\'article est incorrect</string>
+    <string name="list_product">ProduitsXXXX</string>
+    <string name="list_market">Liste</string>
 
     <string name="search">Recherche</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.dias_family.maketlist.controle.adapter;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,23 +9,22 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-
 import com.dias_family.maketlist.R;
-import com.dias_family.maketlist.model.OnMarketItem;
+import com.dias_family.maketlist.model.Item;
 
 import java.util.ArrayList;
 
-public class OnMarketAdapter extends BaseAdapter implements Filterable {
+public class ItemListAdapter extends BaseAdapter implements Filterable{
 
     private Context mContext;
     private LayoutInflater layoutInflater;
-    private ArrayList<OnMarketItem> itemList,staticList;
+    private ArrayList<Item> itemList,staticList;
     private AdapterFiltre valueFilter;
 
-    public OnMarketAdapter(Context mContext, ArrayList<OnMarketItem> itemList) {
+    public ItemListAdapter(Context mContext) {
         this.mContext = mContext;
-        this.itemList = itemList;
-        this.staticList = itemList;
+        this.staticList = Item.listItem;
+        this.itemList = Item.listItem;
         layoutInflater = LayoutInflater.from(mContext);
     }
 
@@ -36,7 +34,7 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public OnMarketItem getItem(int position) {
+    public Item getItem(int position) {
         return itemList.get(position);
     }
 
@@ -59,11 +57,8 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        OnMarketItem item = this.itemList.get(position);
-        holder.itemNameView.setText(item.getItem().getItemName());
-        if(item.isOnPanner()){
-            holder.itemNameView.setBackground(mContext.getResources().getDrawable(R.drawable.item_on_panner));
-        }
+        Item item = this.itemList.get(position);
+        holder.itemNameView.setText(item.getItemName());
 
         return convertView;
 
@@ -87,9 +82,9 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
             if(constraint != null && constraint.length()>0){
-                ArrayList<OnMarketItem> filterList = new ArrayList<OnMarketItem>();
-                for(OnMarketItem item : staticList){
-                    if(item.getItem().getItemName().toUpperCase().contains(constraint.toString().toUpperCase())){
+                ArrayList<Item> filterList = new ArrayList<Item>();
+                for(Item item : staticList){
+                    if(item.getItemName().toUpperCase().contains(constraint.toString().toUpperCase())){
                         filterList.add(item);
                     }
                 }
@@ -105,7 +100,7 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
 
-            itemList = (ArrayList<OnMarketItem>) results.values;
+            itemList = (ArrayList<Item>) results.values;
             notifyDataSetChanged();
 
         }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ItemListFragment">
+
+    <ListView
+        android:id="@+id/list_item_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/div_parent_add_item"
+        android:background="@drawable/corner"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        />
+
+</FrameLayout>

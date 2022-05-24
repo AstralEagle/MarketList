@@ -10,7 +10,7 @@ import java.util.List;
 public class Item implements Serializable {
 
 
-    public static HashMap<String, Item> listItem = new HashMap<>();
+    public static ArrayList<Item> listItem = new ArrayList<>();
 
     private String itemName;
     private int utilisation;
@@ -20,17 +20,18 @@ public class Item implements Serializable {
         this.itemName = itemname;
         this.utilisation = 0;
 
-        listItem.put(itemname, this);
+        listItem.add(this);
     }
 
     // Fonction qui ajoute l'item a la liste de course, si il n'existe pas encore il le créer.
     public static Item getItem(String itemName) {
 
-        if (!listItem.containsKey(itemName)) {
-            return (new Item(itemName));
-        } else {
-            return (listItem.get(itemName));
+        for(Item item : listItem){
+            if(itemName.equals(item.getItemName())){
+                return item;
+            }
         }
+        return (new Item(itemName));
     }
 
 
