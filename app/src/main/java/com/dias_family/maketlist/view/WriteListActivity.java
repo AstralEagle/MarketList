@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dias_family.maketlist.R;
+import com.dias_family.maketlist.controle.ListCourse;
+import com.dias_family.maketlist.controle.OnMarket;
 import com.dias_family.maketlist.controle.adapter.MainViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -38,7 +40,6 @@ public class WriteListActivity extends AppCompatActivity implements View.OnClick
         new TabLayoutMediator(tabLayout,pageView,new TabLayoutMediator.TabConfigurationStrategy(){
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position){
-                System.out.println("Switch : "+ position);
                 switch(position){
                     default:
                         tab.setText("Error");
@@ -57,7 +58,9 @@ public class WriteListActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, OnMaketActivity.class);
-        startActivity(intent);
+
+        OnMarket.initList(ListCourse.getList());
+        Intent mainIntent = new Intent(this, OnMaketActivity.class);
+        startActivity(mainIntent);
     }
 }

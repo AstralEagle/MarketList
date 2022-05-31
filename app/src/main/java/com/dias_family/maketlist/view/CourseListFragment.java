@@ -40,7 +40,7 @@ public class CourseListFragment extends Fragment {
 
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
                     if (editTextProduct.getText().toString().length() > 0) {
-                        if (ListCourse.addItem(editTextProduct.getText().toString())) {
+                        if (ListCourse.addItem(editTextProduct.getText().toString(),getContext())) {
                             listAdapter.notifyDataSetChanged();
                             toastMsg(R.string.adding_item);
                             editTextProduct.setText(null);

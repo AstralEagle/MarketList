@@ -1,31 +1,35 @@
 package com.dias_family.maketlist.model;
 
-import com.dias_family.maketlist.R;
+
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+@Entity(tableName = "items")
 public class Item implements Serializable {
 
+    private static List<Item> listItem = new ArrayList<>();
 
-    public static ArrayList<Item> listItem = new ArrayList<>();
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     private String itemName;
     private int utilisation;
 
     //Constructor
-    private Item(String itemname) {
-        this.itemName = itemname;
-        this.utilisation = 0;
 
+
+    public Item(String itemName) {
+        this.itemName = itemName;
+        this.utilisation = 0;
         listItem.add(this);
     }
 
-    // Fonction qui ajoute l'item a la liste de course, si il n'existe pas encore il le créer.
-    public static Item getItem(String itemName) {
-
+    public static Item getItem(String itemName){
         for(Item item : listItem){
             if(itemName.equals(item.getItemName())){
                 return item;
@@ -35,7 +39,37 @@ public class Item implements Serializable {
     }
 
 
+    // Fonction qui retourne un item grâce à son ID
+    public static Item getItemById(int id){
+        for(Item item : listItem){
+            if(item.getId() == id){
+                return item;
+            }
+        }
+        return null;
+    }
+
+    // Fonction qui retroune un item grâce à son Nom
+    public static Item getItemByName(String itemName){
+        for(Item item : listItem){
+            if(itemName.equals(item.getItemName())){
+                return item;
+            }
+        }
+        return null;
+    }
+
+
     //Getter et setteur
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getItemName() {
         return itemName;
     }
@@ -48,7 +82,20 @@ public class Item implements Serializable {
         return utilisation;
     }
 
-    public void addUsation() {
-        this.utilisation++;
+    public void setUtilisation(int utilisation) {
+        this.utilisation = utilisation;
+    }
+
+    public void addUsation(){
+        this.utilisation ++;
+    }
+
+    public static List<Item> getAllItems(){
+        return listItem;
+    }
+
+    // Init list Item
+    public static void initListItem(List list){
+        listItem = list;
     }
 }

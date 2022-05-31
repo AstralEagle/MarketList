@@ -7,20 +7,43 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.dias_family.maketlist.R;
+import com.dias_family.maketlist.controle.ListCourse;
+import com.dias_family.maketlist.controle.data.DataBase;
+import com.dias_family.maketlist.controle.data.ItemDao;
+import com.dias_family.maketlist.controle.data.ListDao;
+import com.dias_family.maketlist.model.Item;
+import com.dias_family.maketlist.model.ItemList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private DataBase dataBase;
+    private ItemDao itemDao;
+    private ListDao listDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println("MarketList");
+        getAllItems();
+    }
 
-        //Intent mainIntent = new Intent(MainActivity.this, CourseListActivity.class);
-        System.out.println("Befor Intent");
+    private void getAllItems(){
+        new Thread(
+                ()->{
+                    dataBase = DataBase.getDataBase(MainActivity.this);
+                    itemDao = dataBase.itemDao();
+                    Item.initListItem(itemDao.getAllItems());
+
+                    dataBase.close();
+                    goOtherActivity();
+                }
+        ).start();
+    }
+
+    private void goOtherActivity(){
         Intent mainIntent = new Intent(MainActivity.this, WriteListActivity.class);
-        System.out.println("After Adapter");
         startActivity(mainIntent);
         finish();
     }

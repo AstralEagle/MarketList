@@ -3,16 +3,21 @@ package com.dias_family.maketlist.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.dias_family.maketlist.R;
 import com.dias_family.maketlist.controle.ListCourse;
 import com.dias_family.maketlist.controle.adapter.ItemListAdapter;
+import com.dias_family.maketlist.controle.data.DataBase;
+import com.dias_family.maketlist.controle.data.ItemDao;
+import com.dias_family.maketlist.model.Item;
 
 public class ItemListFragment extends Fragment {
 
@@ -33,6 +38,25 @@ public class ItemListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListCourse.addItem(itemAdapter.getItem(position).getItemName());
+            }
+        });
+        listViewItem.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Item select = itemAdapter.getItem(position);
+                new Thread(
+                        ()->{
+                            DataBase data = DataBase.getDataBase(getContext());
+                            ItemDao itemDao = data.itemDao();
+                            itemDao.deleteItem(select);
+                        }
+                ).start();
+
+                itemAdapter.removeItem(select);
+                itemAdapter.notifyDataSetChanged();
+
+
+                return true;
             }
         });
 

@@ -10,11 +10,22 @@
         android:layout_height="match_parent"
         android:background="@color/primal_grey">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/search_layout"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            android:weightSum="8"
+            android:orientation="horizontal"
+            >
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:src="@drawable/ic_arrow_back"
+                android:paddingLeft="15dp"
+
+                />
             <EditText
                 android:id="@+id/on_market_search_text"
                 android:layout_width="match_parent"
@@ -24,14 +35,11 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"/>
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
+                android:textColorHint="@color/black"
+                android:layout_weight="1"
                 />
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <ListView
             android:id="@+id/on_market_list_item"

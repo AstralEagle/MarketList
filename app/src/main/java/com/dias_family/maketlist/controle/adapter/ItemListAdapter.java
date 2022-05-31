@@ -13,20 +13,32 @@ import com.dias_family.maketlist.R;
 import com.dias_family.maketlist.model.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemListAdapter extends BaseAdapter implements Filterable{
 
     private Context mContext;
     private LayoutInflater layoutInflater;
-    private ArrayList<Item> itemList,staticList;
+    private List<Item> itemList,staticList;
     private AdapterFiltre valueFilter;
 
     public ItemListAdapter(Context mContext) {
         this.mContext = mContext;
-        this.staticList = Item.listItem;
-        this.itemList = Item.listItem;
+        this.staticList = Item.getAllItems();
+        this.itemList = Item.getAllItems();
         layoutInflater = LayoutInflater.from(mContext);
     }
+
+    public void removeItem(Item item){
+        if(staticList.contains(item)){
+            staticList.remove(item);
+            if(itemList.contains(item)){
+                itemList.remove(item);
+            }
+        }
+
+    }
+
 
     @Override
     public int getCount() {
@@ -82,7 +94,7 @@ public class ItemListAdapter extends BaseAdapter implements Filterable{
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
             if(constraint != null && constraint.length()>0){
-                ArrayList<Item> filterList = new ArrayList<Item>();
+                List<Item> filterList = new ArrayList<>();
                 for(Item item : staticList){
                     if(item.getItemName().toUpperCase().contains(constraint.toString().toUpperCase())){
                         filterList.add(item);
@@ -100,7 +112,7 @@ public class ItemListAdapter extends BaseAdapter implements Filterable{
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
 
-            itemList = (ArrayList<Item>) results.values;
+            itemList = (List<Item>) results.values;
             notifyDataSetChanged();
 
         }

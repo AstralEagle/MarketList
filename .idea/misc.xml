@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/corner.xml" value="0.2365" />
+        <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/ic_arrow_back.xml" value="0.1035" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.1265" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2385" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/ic_shopping_cart.xml" value="0.1265" />
@@ -11,7 +12,7 @@
         <entry key="..\:/GitLib/MarketList/app/src/main/res/drawable/item_on_panner.xml" value="0.305" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_course_list.xml" value="0.1" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_main.xml" value="0.14" />
-        <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_on_maket.xml" value="0.2703125" />
+        <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_on_maket.xml" value="0.1990521327014218" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_write_list.xml" value="0.1" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/activity_writing.xml" value="0.20833333333333334" />
         <entry key="..\:/GitLib/MarketList/app/src/main/res/layout/fragment_course_list.xml" value="0.129981884057971" />

@@ -45,6 +45,17 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
         return position;
     }
 
+    public void onCheckItem(View view,int position){
+        view.setBackground(mContext.getDrawable(R.drawable.item_on_panner));
+        staticList.get(staticList.indexOf(itemList.get(position))).setOnPanner(true);
+        itemList.get(position).setOnPanner(true);
+    }
+    public void unCheckItem(View view, int position){
+        view.setBackground(null);
+        staticList.get(staticList.indexOf(itemList.get(position))).setOnPanner(false);
+        itemList.get(position).setOnPanner(false);
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -62,7 +73,7 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
         OnMarketItem item = this.itemList.get(position);
         holder.itemNameView.setText(item.getItem().getItemName());
         if(item.isOnPanner()){
-            holder.itemNameView.setBackground(mContext.getResources().getDrawable(R.drawable.item_on_panner));
+            convertView.setBackground(mContext.getDrawable(R.drawable.item_on_panner));
         }
 
         return convertView;

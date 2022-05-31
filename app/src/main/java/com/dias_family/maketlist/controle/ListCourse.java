@@ -1,9 +1,15 @@
 package com.dias_family.maketlist.controle;
 
+import android.content.Context;
+
 import com.dias_family.maketlist.R;
+import com.dias_family.maketlist.controle.data.DataBase;
+import com.dias_family.maketlist.controle.data.ItemDao;
 import com.dias_family.maketlist.model.Item;
+import com.dias_family.maketlist.model.ItemList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListCourse {
 
@@ -30,4 +36,38 @@ public class ListCourse {
     public static void removeItem(Item item){
         listCourse.remove(item);
     }
+
+    public static boolean addItem(String nameItem, Context context){
+        Item item = getItemByName(nameItem,context);
+            if(!listCourse.contains(item)) {
+                listCourse.add(item);
+                return true;
+            }else {
+                return false;
+            }
+    }
+
+    private static Item getItemByName(String nameItem, Context context){
+        for(Item item : Item.getAllItems()){
+            if(nameItem.equals(item.getItemName())){
+                return item;
+            }
+        }
+        Item item = new Item(nameItem);
+        new Thread(
+                ()->{
+                    DataBase data = DataBase.getDataBase(context);
+                    ItemDao itemDao = data.itemDao();
+                    itemDao.insetItem(item);
+                }
+        ).start();
+        return item;
+    }
+
+    public static void initList(List<ItemList> list){
+        for(ItemList itemList : list){
+            listCourse.add(Item.getItemById(itemList.getIdProduct()));
+        }
+    }
 }
+
