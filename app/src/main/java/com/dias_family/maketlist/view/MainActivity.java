@@ -8,15 +8,14 @@ import android.os.Bundle;
 
 import com.dias_family.maketlist.R;
 import com.dias_family.maketlist.controle.ListCourse;
-import com.dias_family.maketlist.controle.data.DataBase;
 import com.dias_family.maketlist.controle.data.ItemDao;
 import com.dias_family.maketlist.controle.data.ListDao;
+import com.dias_family.maketlist.controle.data.ListItemDataBase;
 import com.dias_family.maketlist.model.Item;
-import com.dias_family.maketlist.model.ItemList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DataBase dataBase;
+    private ListItemDataBase itemDataBase;
     private ItemDao itemDao;
     private ListDao listDao;
 
@@ -32,11 +31,15 @@ public class MainActivity extends AppCompatActivity {
     private void getAllItems(){
         new Thread(
                 ()->{
-                    dataBase = DataBase.getDataBase(MainActivity.this);
-                    itemDao = dataBase.itemDao();
+                    itemDataBase = ListItemDataBase.getDataBase(MainActivity.this);
+                    itemDao = itemDataBase.itemDao();
                     Item.initListItem(itemDao.getAllItems());
 
-                    dataBase.close();
+                    listDao = itemDataBase.listDao();
+                    ListCourse.initList(listDao.initList());
+
+                    //courseDataBase.close();
+
                     goOtherActivity();
                 }
         ).start();

@@ -2,9 +2,9 @@ package com.dias_family.maketlist.controle;
 
 import android.content.Context;
 
-import com.dias_family.maketlist.R;
-import com.dias_family.maketlist.controle.data.DataBase;
 import com.dias_family.maketlist.controle.data.ItemDao;
+import com.dias_family.maketlist.controle.data.ListDao;
+import com.dias_family.maketlist.controle.data.ListItemDataBase;
 import com.dias_family.maketlist.model.Item;
 import com.dias_family.maketlist.model.ItemList;
 
@@ -13,34 +13,30 @@ import java.util.List;
 
 public class ListCourse {
 
+    //Variable
     private static ArrayList<Item> listCourse = new ArrayList<>();
 
-    public static void setList(ArrayList list){
-        listCourse = list;
-    }
+    //
+    //Fonction
+    //
 
     public static ArrayList<Item> getList(){
         return listCourse;
     }
 
     //Function qui permet d'ajouter un item dans la list retourne false si l'item y est deja
-    public static boolean addItem(String nameItem){
-        Item item = Item.getItem(nameItem);
-        if(!listCourse.contains(item)) {
-            listCourse.add(item);
-            return true;
-        }else {
-            return false;
-        }
-    }
-    public static void removeItem(Item item){
-        listCourse.remove(item);
-    }
-
     public static boolean addItem(String nameItem, Context context){
         Item item = getItemByName(nameItem,context);
             if(!listCourse.contains(item)) {
                 listCourse.add(item);
+                new Thread(
+                        ()->{
+                            ListItemDataBase dataBase = ListItemDataBase.getDataBase(context);
+                            ListDao dao = dataBase.listDao();
+                            dao.addItem(new ItemList(item));
+
+                        }
+                ).start();
                 return true;
             }else {
                 return false;
@@ -56,7 +52,7 @@ public class ListCourse {
         Item item = new Item(nameItem);
         new Thread(
                 ()->{
-                    DataBase data = DataBase.getDataBase(context);
+                    ListItemDataBase data = ListItemDataBase.getDataBase(context);
                     ItemDao itemDao = data.itemDao();
                     itemDao.insetItem(item);
                 }
@@ -64,10 +60,24 @@ public class ListCourse {
         return item;
     }
 
+    //Fonction qui permet de supprimer un item de la list de course
+    public static void removeItem(Item item, Context context){
+        listCourse.remove(item);
+        new Thread(
+                ()->{
+                    ListItemDataBase dataBase = ListItemDataBase.getDataBase(context);
+                    ListDao listDao = dataBase.listDao();
+                    listDao.removeItem(ItemList.getItemListByItem(item));
+                }
+        ).start();
+    }
+
+    //Fonction qui permet d'initialiser la liste de course grace a une list d'ItemList
     public static void initList(List<ItemList> list){
         for(ItemList itemList : list){
-            listCourse.add(Item.getItemById(itemList.getIdProduct()));
+            listCourse.add(itemList.getItem());
         }
     }
 }
+
 

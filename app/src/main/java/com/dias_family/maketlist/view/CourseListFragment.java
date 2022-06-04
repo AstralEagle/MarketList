@@ -68,7 +68,7 @@ public class CourseListFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                ListCourse.removeItem(ListCourse.getList().get(position));
+                ListCourse.removeItem(ListCourse.getList().get(position),getContext());
                 toastMsg(R.string.remove_item);
                 listAdapter.notifyDataSetChanged();
 

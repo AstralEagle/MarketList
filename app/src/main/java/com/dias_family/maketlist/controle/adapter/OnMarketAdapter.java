@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.dias_family.maketlist.R;
@@ -23,11 +24,18 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
     private ArrayList<OnMarketItem> itemList,staticList;
     private AdapterFiltre valueFilter;
 
+    private boolean isTakin;
+
     public OnMarketAdapter(Context mContext, ArrayList<OnMarketItem> itemList) {
         this.mContext = mContext;
         this.itemList = itemList;
         this.staticList = itemList;
-        layoutInflater = LayoutInflater.from(mContext);
+        this.layoutInflater = LayoutInflater.from(mContext);
+        this.isTakin = false;
+    }
+
+    public void setTakingFiltre(boolean isTakin){
+        this.isTakin = isTakin;
     }
 
     @Override
@@ -46,14 +54,14 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
     }
 
     public void onCheckItem(View view,int position){
-        view.setBackground(mContext.getDrawable(R.drawable.item_on_panner));
         staticList.get(staticList.indexOf(itemList.get(position))).setOnPanner(true);
         itemList.get(position).setOnPanner(true);
+        this.notifyDataSetChanged();
     }
     public void unCheckItem(View view, int position){
-        view.setBackground(null);
         staticList.get(staticList.indexOf(itemList.get(position))).setOnPanner(false);
         itemList.get(position).setOnPanner(false);
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -74,6 +82,8 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
         holder.itemNameView.setText(item.getItem().getItemName());
         if(item.isOnPanner()){
             convertView.setBackground(mContext.getDrawable(R.drawable.item_on_panner));
+        }else{
+            convertView.setBackground(null);
         }
 
         return convertView;
@@ -97,10 +107,32 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
+            if(isTakin){
+                if(constraint != null && constraint.length()>0){
+                    ArrayList<OnMarketItem> filterList = new ArrayList<OnMarketItem>();
+                    for(OnMarketItem item : staticList){
+                        if(item.getItem().getItemName().toUpperCase().contains(constraint.toString().toUpperCase()) && !item.isOnPanner()){
+                            filterList.add(item);
+                        }
+                    }
+                    results.count = filterList.size();
+                    results.values = filterList;
+                }else{
+                    ArrayList<OnMarketItem> filterList = new ArrayList<OnMarketItem>();
+                    for(OnMarketItem item : staticList){
+                        if(!item.isOnPanner()){
+                            filterList.add(item);
+                        }
+                    }
+                    results.count = filterList.size();
+                    results.values = filterList;
+                }
+            }else{
             if(constraint != null && constraint.length()>0){
                 ArrayList<OnMarketItem> filterList = new ArrayList<OnMarketItem>();
                 for(OnMarketItem item : staticList){
                     if(item.getItem().getItemName().toUpperCase().contains(constraint.toString().toUpperCase())){
+
                         filterList.add(item);
                     }
                 }
@@ -109,7 +141,7 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
             }else{
                 results.count = staticList.size();
                 results.values = staticList;
-            }
+            }}
             return results;
         }
 

@@ -8,8 +8,14 @@
     <string name="error_item_name">Le nom de l\'article est incorrect</string>
     <string name="list_product">ProduitsXXXX</string>
     <string name="list_market">Liste</string>
+    <string name="marketEnd">Course fini?</string>
+    <string name="keep_item">Voulez vous garder les produit non acheté?</string>
 
     <string name="search">Recherche</string>
+
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

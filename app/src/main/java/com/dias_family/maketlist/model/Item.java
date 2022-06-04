@@ -3,6 +3,7 @@ package com.dias_family.maketlist.model;
 
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "items")
-public class Item implements Serializable {
+public class Item {
 
     private static List<Item> listItem = new ArrayList<>();
 
@@ -23,6 +24,13 @@ public class Item implements Serializable {
     //Constructor
 
 
+    public Item(int id, String itemName, int utilisation) {
+        this.id = id;
+        this.itemName = itemName;
+        this.utilisation = utilisation;
+    }
+
+    @Ignore
     public Item(String itemName) {
         this.itemName = itemName;
         this.utilisation = 0;

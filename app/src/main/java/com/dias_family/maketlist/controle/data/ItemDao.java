@@ -14,20 +14,20 @@ import java.util.List;
 public interface ItemDao {
 
     @Insert
-    public void insetItem(Item item);
+    void insetItem(Item item);
 
     @Update
-    public void updateItem(Item item);
+    void updateItem(Item item);
 
     @Delete
-    public void deleteItem(Item item);
+    void deleteItem(Item item);
 
     @Query("SELECT * FROM items")
-    public List<Item> getAllItems();
+    List<Item> getAllItems();
 
     @Query("SELECT * FROM items WHERE itemName = :itemName")
-    public List<Item> getItemByName(String itemName);
+    List<Item> getItemByName(String itemName);
 
     @Query("SELECT * FROM items WHERE id = :id")
-    public Item getItemById(int id);
+    Item getItemById(int id);
 }

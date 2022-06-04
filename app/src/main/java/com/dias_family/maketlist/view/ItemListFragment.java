@@ -15,8 +15,8 @@ import android.widget.Toast;
 import com.dias_family.maketlist.R;
 import com.dias_family.maketlist.controle.ListCourse;
 import com.dias_family.maketlist.controle.adapter.ItemListAdapter;
-import com.dias_family.maketlist.controle.data.DataBase;
 import com.dias_family.maketlist.controle.data.ItemDao;
+import com.dias_family.maketlist.controle.data.ListItemDataBase;
 import com.dias_family.maketlist.model.Item;
 
 public class ItemListFragment extends Fragment {
@@ -37,7 +37,7 @@ public class ItemListFragment extends Fragment {
         listViewItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListCourse.addItem(itemAdapter.getItem(position).getItemName());
+                ListCourse.addItem(itemAdapter.getItem(position).getItemName(),getContext());
             }
         });
         listViewItem.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -46,7 +46,7 @@ public class ItemListFragment extends Fragment {
                 Item select = itemAdapter.getItem(position);
                 new Thread(
                         ()->{
-                            DataBase data = DataBase.getDataBase(getContext());
+                            ListItemDataBase data = ListItemDataBase.getDataBase(getContext());
                             ItemDao itemDao = data.itemDao();
                             itemDao.deleteItem(select);
                         }
@@ -59,8 +59,6 @@ public class ItemListFragment extends Fragment {
                 return true;
             }
         });
-
-
         return view;
     }
 
