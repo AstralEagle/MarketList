@@ -56,6 +56,11 @@ public class WriteListActivity extends AppCompatActivity implements View.OnClick
         }).attach();
     }
 
+    public void onResume(){
+        super.onResume();
+        pageView.setCurrentItem(1);
+    }
+
     @Override
     public void onClick(View v) {
 

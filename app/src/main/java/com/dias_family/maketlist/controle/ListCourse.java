@@ -20,6 +20,11 @@ public class ListCourse {
     //Fonction
     //
 
+
+    public static void resetList(ArrayList<Item> listCourse) {
+        ListCourse.listCourse = listCourse;
+    }
+
     public static ArrayList<Item> getList(){
         return listCourse;
     }

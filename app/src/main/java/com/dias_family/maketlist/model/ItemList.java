@@ -47,7 +47,7 @@ public class ItemList {
     }
 
     //
-    public void initList(List<ItemList> list){
+    public static void initList(List<ItemList> list){
        listItem = list;
     }
 

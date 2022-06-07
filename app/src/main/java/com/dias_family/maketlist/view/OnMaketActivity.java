@@ -18,8 +18,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dias_family.maketlist.R;
+import com.dias_family.maketlist.controle.ListCourse;
 import com.dias_family.maketlist.controle.OnMarket;
 import com.dias_family.maketlist.controle.adapter.OnMarketAdapter;
+import com.dias_family.maketlist.controle.data.ItemDao;
+import com.dias_family.maketlist.controle.data.ListDao;
+import com.dias_family.maketlist.controle.data.ListItemDataBase;
+import com.dias_family.maketlist.model.Item;
+import com.dias_family.maketlist.model.ItemList;
+import com.dias_family.maketlist.model.OnMarketItem;
+
+import java.util.ArrayList;
 
 public class OnMaketActivity extends AppCompatActivity {
 
@@ -88,6 +97,12 @@ public class OnMaketActivity extends AppCompatActivity {
                 listAdapter.getFilter().filter(searchText.getText());
             }
         });
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
 
@@ -98,23 +113,38 @@ public class OnMaketActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        beforEndActivity(false);
+                        saveItemList(listAdapter.getIsTakinItem());
                     }})
                 .setNegativeButton(R.string.no,  new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        beforEndActivity(true);
-                    }}).show();
+                        saveItemList(listAdapter.getStaticList());
+                    }})
+                .setNeutralButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
 
 
     }
 
-    private void beforEndActivity(boolean isKeep){
-        if(isKeep){
+    // Fonction qui permet d'augmenter l'achat des objets et de mettre a jour la list de course selon une list
+    private void saveItemList(ArrayList<OnMarketItem> list){
+        for(OnMarketItem item : list){
+            item.getItem().addUsation();
+            new Thread(
+                    ()->{
+                        ListItemDataBase dataBase = ListItemDataBase.getDataBase(OnMaketActivity.this);
+                        ItemDao itemDao = dataBase.itemDao();
 
+                        itemDao.updateItem(item.getItem());
+
+                        ListCourse.removeItem(item.getItem(),OnMaketActivity.this);
+                    }
+            ).start();
         }
-
-
-        this.finish();
+        finish();
     }
 }

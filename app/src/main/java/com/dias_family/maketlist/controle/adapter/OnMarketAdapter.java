@@ -38,6 +38,19 @@ public class OnMarketAdapter extends BaseAdapter implements Filterable {
         this.isTakin = isTakin;
     }
 
+    public ArrayList getStaticList(){
+        return staticList;
+    }
+
+    public ArrayList getIsTakinItem(){
+        ArrayList<OnMarketItem> list = new ArrayList<>();
+        for(OnMarketItem item : staticList){
+            if(item.isOnPanner())
+                list.add(item);
+        }
+        return list;
+    }
+
     @Override
     public int getCount() {
         return itemList.size();
